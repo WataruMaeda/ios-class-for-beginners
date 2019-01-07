@@ -7,6 +7,22 @@ handlers:
   static_files: www/index.html
   upload: www/index.html
 
+- url: /jp
+  static_files: www/jp/index.html
+  upload: www/jp/index.html
+
+- url: /ca
+  static_files: www/ca/index.html
+  upload: www/ca/index.html
+
 - url: /(.*)
   static_files: www/\1
   upload: www/(.*)
+
+- url: /jp/(.*)
+  static_files: www/jp/\1
+  upload: www/jp/(.*)
+
+- url: /ca/(.*)
+  static_files: www/ca/\1
+  upload: www/ca/(.*)

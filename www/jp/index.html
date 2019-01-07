@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>iPhoneアプリ開発入門コース</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link href="css/agency.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/creative.css" type="text/css">
+
+    <!-- Google map -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript">
+
+    var centerMap = new google.maps.LatLng(34.637622, 135.498345);
+    var colab = new google.maps.LatLng(34.666056, 135.500476);
+    var dotole = new google.maps.LatLng(34.556315, 135.504258);
+    var offices = [colab, dotole];
+
+    var markers = [];
+    var iterator = 0;
+
+    var map;
+
+    function initialize() {
+      var mapOptions = {
+        zoom: 11,
+        scrollwheel: false,
+        center: centerMap,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [
+        {featureType:"landscape.natural", elementType:"geometry.fill", stylers:[{color:"#f5f5f2"},{visibility:"on"}]},
+        {featureType:"administrative", stylers:[{visibility:"off"}]},
+        {featureType:"transit", stylers:[{visibility:"on"}]},
+        {featureType:"poi.attraction", stylers:[{visibility:"off"}]},
+        {featureType:"landscape.man_made", elementType:"geometry.fill", stylers:[{color:"#ffffff"},{visibility:"on"}]},
+        {featureType:"poi.business", stylers:[{visibility:"off"}]},
+        {featureType:"poi.medical", stylers:[{visibility:"off"}]},
+        {featureType:"poi.place_of_worship", stylers:[{visibility:"off"}]},
+        {featureType:"poi.school", stylers:[{visibility:"off"}]},
+        {featureType:"poi.sports_complex", stylers:[{visibility:"off"}]},
+        {featureType:"road.highway", elementType:"geometry", stylers:[{color:"#ffffff"},{visibility:"simplified"}]},
+        {featureType:"road.arterial", stylers:[{visibility:"simplified"},{color:"#ffffff"}]},
+        {featureType:"road.highway", elementType:"labels.icon", stylers:[{color:"#ffffff"},{visibility:"off"}]},
+        {featureType:"road.highway", elementType:"labels.icon", stylers:[{visibility:"off"}]},
+        {featureType:"road.arterial", stylers:[{color:"#ffffff"}]},
+        {featureType:"road.local", stylers:[{color:"#ffffff"}]},
+        {featureType:"poi.park", elementType:"labels.icon", stylers:[{visibility:"off"}]},
+        {featureType:"poi", elementType:"labels.icon", stylers:[{visibility:"off"}]},
+        {featureType:"water", stylers:[{color:"#71c8d4"}]},
+        {featureType:"landscape", stylers:[{color:"#e5e8e7"}]},
+        {featureType:"poi.park", stylers:[{color:"#8ba129"}]},
+        {featureType:"road", stylers:[{color:"#ffffff"}]},
+        {featureType:"poi.sports_complex", elementType:"geometry", stylers:[{color:"#c7c7c7"},{visibility:"off"}]},
+        {featureType:"water", stylers:[{color:"#a0d3d3"}]},
+        {featureType:"poi.park", stylers:[{color:"#91b65d"}]},
+        {featureType:"poi.park", stylers:[{"gamma":1.51}]},
+        {featureType:"road.local", stylers:[{visibility:"off"}]},
+        {featureType:"road.local", elementType:"geometry", stylers:[{visibility:"on"}]},
+        {featureType:"poi.government", elementType:"geometry", stylers:[{visibility:"off"}]},
+        {featureType:"landscape", stylers:[{visibility:"on"}]},
+        {featureType:"road", elementType:"labels", stylers:[{visibility:"on"}, {color: "#676767"}]},
+        {featureType:"road", elementType:"labels.text.stroke", stylers:[{visibility:"off"}]},
+        {featureType:"road", elementType:"labels.icon", stylers:[{visibility:"off"}]},
+        {featureType:"road.arterial", elementType:"geometry", stylers:[{visibility:"simplified"}]},
+        {featureType:"road.local", stylers:[{visibility:"simplified"}]},
+        ]
+      };
+      map = new google.maps.Map(document.getElementById('map'),
+        mapOptions);
+
+      setTimeout(function() {
+        drop();
+      }, 3000);
+    }
+
+    function drop() {
+      for (var i = 0; i < offices.length; i++) {
+        setTimeout(function() {
+          addMarker();
+        }, i * 200);
+      }
+    }
+
+    function addMarker() {
+      markers.push(new google.maps.Marker({
+        position: offices[iterator],
+        map: map,
+        draggable: false,
+        animation: google.maps.Animation.DROP
+      }));
+      iterator++;
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    <!-- Google map -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Back to top</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#about">こんな人向け</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#features">特徴</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#portfolio">概要</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#meetup">Meetup</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#place">開催場所</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">お問い合わせ</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1>初心者・未経験者の、iPhoneアプリ開発入門コース</h1>
+                <hr>
+                <p>iPhoneアプリを作ってみたいけど、何から始めたらいいかわからない、料金が高いから気軽に学べないと考えている方へ。初心者・未経験者のiPhoneアプリ開発コースを受講してみませんか？自分の好きな時間に、好きな内容を学べるアプリ開発教室です。</p>
+                <a href="#features" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-primary" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">こんな人向け</h2>
+                    <hr class="light">
+                    <p class="text-faded">
+                      iPhoneアプリを作ってみたい方<br>
+                      実際に動くアプリを作ってみたい方<br>
+                      プログラミング未経験者、初心者の方 (経験者も歓迎しています)<br>
+                      なるべく安く、時間のあるときに、好きな内容だけ学びたい方</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">特徴</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-heart wow bounceIn text-primary"></i>
+                        <h3>初心者、未経験者歓迎</h3>
+                        <p class="text-muted">アプリ開発から、リリースまで一人一人サポートします。</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-clock-o wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                        <h3>フリースタイル</h3>
+                        <p class="text-muted">事前にレベルや目標を確認し、好きな時間に、好きな内容だけ学べます。</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-wrench wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                        <h3>実際に作る</h3>
+                        <p class="text-muted">ワンツーマンもしくは、グループレッスンで、手を動かしてアプリの作り方を覚えます。</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-jpy wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                        <h3>低価格</h3>
+                        <p class="text-muted">登録料、入学金なし。料金もご相談いただけます。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- 概要 -->
+<section id="portfolio" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">概要</h2>
+                    <hr class="primary">
+                    <h3 class="section-subheading text-muted"></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/portfolio/1.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>身につくスキル</h4>
+                        <!-- <p class="text-muted">Recent Project, Released apps</p> -->
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/portfolio/2.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>受講条件、料金</h4>
+                        <!-- <p class="text-muted">Professional, Education, Volunteer</p> -->
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>受講生の作品</h4>
+                        <!-- <p class="text-muted">Development Skills, Personal Qualities</p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/portfolio/4.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>ご利用の流れ</h4>
+                        <!-- <p class="text-muted">Recent Project, Released apps</p> -->
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/portfolio/5.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>スケジュール</h4>
+                        <!-- <p class="text-muted">Professional, Education, Volunteer</p> -->
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/portfolio/6.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>講師</h4>
+                        <!-- <p class="text-muted">Development Skills, Personal Qualities</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Meetup -->
+<section id="meetup">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Meetup</h2>
+                <hr class="primary">
+                <!-- Google map -->
+                <img src="img/portfolio/meetup.jpeg" class="img-responsive" style="width:100%;">
+                <!-- Google map -->
+                <div class="col-lg-6 col-md-6 text-center">
+                  <div class="service-box">
+                      <i class="fa fa-4x fa-file-code-o wow bounceIn text-primary"></i>
+                      <h3>トライアル</h3>
+                      <p class="text-muted">毎月無料のアプリ教室を開いております。興味あるかたは、<a href="http://www.meetup.com/ios-dev-in-namba/">初心者歓迎 iOS Development Meetup</a>へお越しください。</p>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 text-center">
+                  <div class="service-box">
+                      <i class="fa fa-4x fa-github wow bounceIn text-primary"></i>
+                      <h3>教材</h3>
+                      <p class="text-muted">Githubにて、過去のMeetupで使用した<a href="https://github.com/iosClassForBeginner">プロジェクト</a>も掲載しております。自分のペースで勉強したい、勉強した内容の予習、復習したい場合、ご利用ください。</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 開催場所 -->
+<section id="place">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">開催場所</h2>
+                <hr class="primary">
+                <!-- Google map -->
+                <div id="map" style="height:400px;"></div>
+                <!-- Google map -->
+                <div class="col-lg-6 col-md-6 text-center">
+                  <div class="service-box">
+                      <i class="fa fa-4x fa-map-marker wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                      <h3>
+                        <a href="http://coworklabo.com/namba/">Co:Lab 難波店</a>
+                      </h3>
+                      <p class="text-muted">大阪府大阪市浪速区難波中2丁目6-17　河原町ビル2Ｆ
+                      </p>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 text-center">
+                  <div class="service-box">
+                      <i class="fa fa-4x fa-map-marker wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                      <h3>
+                        <a href="http://www.doutor.co.jp/shopsearch/detail/02011915.html">ドトールコーヒーショップ<br>なかもず駅前店</a>
+                      </h3>
+                      <p class="text-muted">大阪府堺市北区中百舌鳥町２－１０</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 問い合わせ -->
+<section id="contact" class="bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">お問い合わせ</h2>
+                <hr class="primary">
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- <form name="sentMessage" id="contactForm" novalidate> -->
+                <form role="form" method="post" action="mail.php">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="お名前 *" name="Name" id="Name" required data-validation-required-message="Please enter your name.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email *" name="Email" id="Email" required data-validation-required-message="Please enter your email address.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="form-control" placeholder="電話番号" name="Phone" id="Phone">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="メッセージ *" name="Message" id="Message" required data-validation-required-message="Please enter a message."></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 text-center">
+                            <div id="success"></div>
+                            <p align="center">
+                              <button type="reset" class="btn btn-default btn-xl tada"　value="Reset">リセット</button>
+                              <button type="submit" class="btn btn-xl wow tada" value="Submit">聞いてみる</button>
+          									</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; Wataru 2016</span>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline social-buttons">
+                  <li><a href="http://wm19850716.esy.es/"><i class="fa fa-globe"></i></a>
+                  </li>
+                  <li><a href="https://ca.linkedin.com/in/wtr0716"><i class="fa fa-linkedin"></i></a>
+                  </li>
+                  <li><a href="https://github.com/WataruMaeda"><i class="fa fa-github"></i></a>
+                  </li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    </footer>
+
+<!-- 概要 -->
+    <!-- 身につくスキル -->
+        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <h2>身につくスキル</h2>
+                                <hr class="primary">
+                                <div align="center">
+                                  <img class="img-responsive img-left" src="img/portfolio/1.jpg" alt="">
+                                </div>
+                            </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                          <div>
+                            <h3>アプリ開発</h3>
+                            <hr class="primary">
+                            <p class="text-muted">アプリ開発に関わる基礎知識、テクニック全般。</p>
+                            <br>
+                          </div>
+                          <i class="fa fa-2x fa-code wow bounceIn text-primary"><font size="4" color="black"> プログラミング基礎</font></i><br><br>
+                          <i class="fa fa-2x fa-gavel wow bounceIn text-primary"><font size="4" color="black"> Xcode</font></i><br><br>
+                          <i class="fa fa-2x fa-sticky-note-o wow bounceIn text-primary"><font size="4" color="black"> Storyboard</font></i><br><br>
+                          <font size="4" color="black"> Objective-</font><i class="fa fa-2x fa-copyright wow bounceIn text-primary"></i><br><br>
+                          <i class="fa fa-2x fa-strikethrough wow bounceIn text-primary"><font size="4" color="black"> wift</font></i><br><br>
+                          <i class="fa fa-2x fa-apple wow bounceIn text-primary"><font size="4" color="black"> UIKitクラス</font></i><br><br>
+                            <br>
+                            <br>
+                            <h3>ウェブ開発</h3>
+                            <hr class="primary">
+                            <p class="text-muted">Bootstrapを使った、簡単なサイトの作り方。</p>
+                            <br>
+                          <i class="fa fa-2x fa-bold wow bounceIn text-primary"><font size="4" color="black"> ootstrap</font></i><br><br>
+                          <div class="col-lg-12 col-md-12 text-left">
+                            <br>
+                            <br>
+                          </div>
+                          <div class="col-lg-12 col-md-12 text-center">
+                            <button type="button" class="btn btn-primary btn-xl tada" data-dismiss="modal"><i class="fa fa-times"></i> 閉じる</button>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 受講条件、料金 -->
+        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <h2>受講条件、料金</h2>
+                                <hr class="primary">
+                                <div align="center">
+                                  <img class="img-responsive img-left" src="img/portfolio/2.jpg" alt="">
+                                </div>
+                                <div class="col-lg-6 col-md-6 text-center">
+                                    <div class="service-box">
+                                        <i class="fa fa-4x fa-laptop wow bounceIn text-primary" data-wow-delay=".5s"></i>
+                                        <h4>Macbookをお持ちの方</h4>
+                                        <p class="text-muted">個人でのMacbookレンタルは行っておりません。</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 text-center">
+                                    <div class="service-box">
+                                        <i class="fa fa-4x fa-map-marker wow bounceIn text-primary" data-wow-delay=".5s"></i>
+                                        <h4>関西圏にお住まいの方</h4>
+                                        <p class="text-muted">大阪の、難波 or なかもずまでお越しできる方、歓迎します。関西圏内であれば、こちらから出向くことも可能です。</p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <h2>料金</h2>
+                                <hr class="primary">
+                                <div align="center">
+                                  <img class="img-responsive img-left" src="img/portfolio/7.jpg" alt="">
+                                </div>
+                                <br>
+                                <!-- 料金テーブル -->
+                                <div class="container">
+                                  <div class="row clearfix">
+                                    <div class="col-lg-8 column">
+                                      <h3>個別 : 2000円 / 1 hour</h3>
+                                      <h3>グループ : 1500円 / 1 hour</h3>
+                                      <br>
+                                      <p class="text-muted">お子様または、月単位での受講をご希望の方、ご相談くださいませ。</p>
+                                      <br>
+                                      <br>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 text-center">
+                                  <button type="button" class="btn btn-primary btn-xl tada" data-dismiss="modal"><i class="fa fa-times"></i>閉じる</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 受講生の作品 -->
+        <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                  <h2>受講生の作品</h2>
+                                  <hr class="primary">
+                                  <div align="center">
+                                    <img class="img-responsive img-left" src="img/portfolio/3.jpg" alt="">
+                                  </div>
+                                  <br>
+                                  <!-- アプリ紹介 -->
+                                  <div class="row">
+                                    <div class="col-sm-2 col-lg-offset-2">
+                                      <div align="center">
+                                        <img alt="150x150" height="150" width="150" class="media-object" style="border:solid 1px #000000; border-radius:25px;" src="http://cdn.appshopper.com/icons/110/4726774_larger.png" />
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                      <div align="center">
+                                        <a href="https://itunes.apple.com/us/app/si-jiaoigohan-hua-xiangdegurume/id1104726774?mt=8"><h3>四角いごはん：画像でグルメ探し</h3></a>
+                                        <p>インスタグラム風に写真から飲食店を検索できるアプリ。<br>
+                                          現在地から近い飲食店を検索できます。
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                <button type="button" class="btn btn-primary btn-xl tada" data-dismiss="modal"><i class="fa fa-times"></i> 閉じる</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ご利用の流れ -->
+        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                  <h2>ご利用の流れ</h2>
+                                  <hr class="primary">
+                                  <p class="text-muted">まずは、問い合わせフォームからのご連絡、おまちしております。</p>
+                                  <div align="center">
+                                    <img class="img-responsive img-left" src="img/portfolio/4.jpg" alt="">
+                                  </div>
+                                  <font size="4" color="black">1. 事前アンケートを記入</font><br><br>
+                                  <i class="fa fa-lg fa-long-arrow-down"></i><br><br>
+                                  <font size="4" color="black">2. 面談でレベルや目的を確認</font><br><br>
+                                  <i class="fa fa-lg fa-long-arrow-down"></i><br><br>
+                                  <font size="4" color="black">3. レッスン予約</font><br><br>
+                                  <i class="fa fa-lg fa-long-arrow-down"></i><br><br>
+                                  <i class="fa fa-4x fa-code wow bounceIn text-primary"><font size="5" color="black"> レッスンスタート！</font></i><br><br>
+                                  <br>
+                                  <br>
+                                <button type="button" class="btn btn-primary btn-xl tada" data-dismiss="modal"><i class="fa fa-times"></i> 閉じる</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- スケジュール -->
+        <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <h2>スケジュール</h2>
+                                <hr class="primary">
+                                <div align="center">
+                                  <img class="img-responsive img-left" src="img/portfolio/5.jpg" alt="">
+                                </div>
+                                <!-- スケジュール -->
+                                <div class="container">
+                                  <div class="row clearfix">
+                                    <div class="col-lg-8 column">
+                                      <table class="table table-striped table-bordered">
+                                        <thead>
+                                        <tr>
+                                          <th rowspan="2">時間</th><th colspan="4">日付</th>
+                                        </tr>
+                                        <tr>
+                                          <th>2/20 (土)</th><th>2/21 (日)</th><th>2/27 (土)</th><th>2/28 (日)</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td>12:00-</td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".1s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".1s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".1s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".1s"></td>
+                                          </tr>
+                                          <tr>
+                                            <td>13:00-</td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".2s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".2s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".2s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".2s"></td>
+                                          </tr>
+                                          <tr>
+                                            <td>14:00-</td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".3s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".3s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".3s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".3s"></td>
+                                          </tr>
+                                          <tr>
+                                            <td>15:00-</td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".4s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".4s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".4s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".4s"></td>
+                                          </tr>
+                                          <tr>
+                                            <td>16:00-</td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".5s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".5s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".5s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".5s"></td>
+                                          </tr>
+                                          <tr>
+                                            <td>17:00-</td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".6s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".6s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".6s"></td>
+                                            <td><i class="fa fa-lg fa-circle-o wow bounceIn text-primary" data-wow-delay=".6s"></td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div align="left">
+                                  <i class="fa fa-lg fa-circle-o wow bounceIn text-primary"><font size="2" color="black"> 参加可</font></i><br>
+                                  <i class="fa fa-lg fa-circle wow bounceIn text-primary"><font size="2" color="black"> 参加可(グループレッスンのみ)</font></i><br>
+                                  <i class="fa fa-lg fa-times wow bounceIn text-primary"><font size="2" color="black"> 参加不可</font></i><br>
+                                </div>
+                                <br>
+                                <br>
+                                <button type="button" class="btn btn-primary btn-xl tada" data-dismiss="modal"><i class="fa fa-times"></i> 閉じる</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 講師 -->
+        <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <h2 class="section-heading">講師</h2>
+                                <hr class="primary">
+                                <div align="center">
+                                  <img class="img-responsive img-left" src="img/portfolio/6.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                          <br>
+                          <h3>前田 渉</h3>
+                          <hr class="primary">
+                          <h6>Maeda Wataru</h6>
+                          <br>
+                          <ul class="list-inline social-buttons">
+                            <li><a href="http://wm19850716.esy.es/"><i class="fa fa-globe"></i></a>
+                            </li>
+                            <li><a href="https://ca.linkedin.com/in/wtr0716"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                            <li><a href="https://github.com/WataruMaeda"><i class="fa fa-github"></i></a>
+                            </li>
+                          </ul>
+                          <p>フリーランスプログラマー。はじめてプログラミングされる方々の手助けができればと思い、2016年度よりiPhoneアプリ開発入門コースを開始。</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-2 col-lg-offset-2">
+                        <div align="center">
+                          <img alt="150x150" height="150" width="150" class="media-object" style="border:solid 1px #000000; border-radius:25px;" src="http://a3.mzstatic.com/eu/r30/Purple30/v4/bf/8f/84/bf8f844b-d669-d6a5-9c5b-9feade9fbdd4/icon175x175.png" />
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <div align="center">
+                          <a href="https://itunes.apple.com/jp/app/shi-jiechubu-guowo-qieri-tiete/id1104727134?mt=8"><h3>世界チューブ : 国を切り替えて動画検索 for YouTube</h3></a>
+                          <p>世界の動画をランキング形式で検索できる、新しいYouTubeアプリ。<br>
+                            国 × カテゴリ × ランキング で動画リストを表示。<br>
+                            トレンドワードで、動画検索できます。
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-2 col-lg-offset-2">
+                        <div align="center">
+                          <img alt="150x150" height="150" width="150" style="border:solid 1px #000000; border-radius:25px;" class="media-object" src="http://a4.mzstatic.com/us/r30/Purple3/v4/b0/40/7c/b0407cd0-469a-c239-a604-7c62745c1a8a/icon175x175.png" />
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <div align="center">
+                          <a href="https://itunes.apple.com/jp/app/zi-fende-zuoru!-dan-yu-zhang/id916196655?mt=8"><h3>自分で作る！単語帳</h3></a>
+                          <p>自分専用の単語帳を作れる、シンプルで使いやすい単語帳アプリです。<br>
+                            作った単語をシャッフルできたり、アプリ内で辞書を使用することも可能です。<br>
+                            アプリ内で単語帳の販売を行っております。
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-2 col-lg-offset-2">
+                        <div align="center">
+                          <img alt="150x150" height="150" width="150" class="media-object" style="border:solid 1px #000000; border-radius:25px;" src="http://is2.mzstatic.com/image/thumb/Purple2/v4/4b/b6/77/4bb677bb-9102-6d98-c657-891f5e1c4fa8/source/400x400bb.png" />
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <div align="center">
+                          <a href="https://itunes.apple.com/jp/app/fu-jianmemo++/id832492204?mt=8"><h3>付箋メモ++</h3></a>
+                          <p>ショートカット操作によって、簡単、スピーディーにメモを作成できます。<br>
+                            片手でのメモ作成をサポートしているため、メモの再編集、一括削除も指一本で実現可能です。<br>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                          <br>
+                          <h3>尾上 宗玄</h3>
+                          <hr class="primary">
+                          <h6>Muneharu Onoue</h6>
+                          <br>
+                          <ul class="list-inline social-buttons">
+                            <li><a href="http://geelive-inc.com/"><i class="fa fa-globe"></i></a>
+                            </li>
+                            <!-- <li><a href="https://ca.linkedin.com/in/wtr0716"><i class="fa fa-linkedin"></i></a>
+                            </li> -->
+                            <li><a href="https://github.com/tailup0"><i class="fa fa-github"></i></a>
+                            </li>
+                          </ul>
+                          <p>アプリケーション受託開発、WEBサイト制作を行う<a href="http://geelive-inc.com/">株式会社ジーライブ</a>代表</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-2 col-lg-offset-2">
+                        <div align="center">
+                          <img alt="150x150" height="150" width="150" class="media-object" style="border:solid 1px #000000; border-radius:25px;" src="http://cdn.appshopper.com/icons/110/4726774_larger.png" />
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <div align="center">
+                          <a href="https://itunes.apple.com/us/app/si-jiaoigohan-hua-xiangdegurume/id1104726774?mt=8"><h3>四角いごはん：画像でグルメ探し</h3></a>
+                          <p>インスタグラム風に写真から飲食店を検索できるアプリ。<br>
+                            現在地から近い飲食店を検索できます。
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-2 col-lg-offset-2">
+                        <div align="center">
+                          <img alt="150x150" height="150" width="150" class="media-object" style="border:solid 1px #000000; border-radius:25px;" src="http://a5.mzstatic.com/jp/r30/Purple18/v4/b6/15/2c/b6152c6f-22b6-ee5e-b4fc-b060288029c2/icon175x175.jpeg" />
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <div align="center">
+                          <a href="https://itunes.apple.com/jp/app/surotto-qi-dai-zhi-mu-zhise/id1125879977?mt=8"><h3>スロット期待値：目指せ時給２K</h3></a>
+                          <p>スロット天井狙いで時給２千円達成する為のアプリです。<br>
+                            狙い目ゲーム数・やめどき・ゾーン等が高速で検索できます。
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                  <div align="center">
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-primary btn-xl tada" data-dismiss="modal"><i class="fa fa-times"></i> 閉じる</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.fittext.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/agency.js"></script>
+    <script src="js/creative.js"></script>
+
+    <!-- UI JavaScript -->
+    <script src=”docs/assets/js/application.js”></script>
+
+</body>
+
+</html>
