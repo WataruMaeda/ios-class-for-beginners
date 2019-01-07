@@ -3,6 +3,10 @@ api_version: 1
 threadsafe: true
 
 handlers:
+- url: /
+  static_files: www/html/jp/index.html
+  upload: www/html/jp/index.html
+
 - url: /jp
   static_files: www/html/jp/index.html
   upload: www/html/jp/index.html

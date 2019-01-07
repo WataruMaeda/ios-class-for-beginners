@@ -33,7 +33,7 @@ if (version_compare(PHP_VERSION, '5.1.0', '>=')) {//PHP5.1.0以上の場合の�
 //---------------------------　必須設定　必ず設定してください　-----------------------
 
 //サイトのトップページのURL　※デフォルトでは送信完了後に「トップページへ戻る」ボタンが表示されますので
-$site_top = " http://ios-class-for-beginner.esy.es/";
+$site_top = " http://ios-class-for-beginners.com/ca/";
 
 // 管理者メールアドレス ※メールを受け取るメールアドレス(複数指定する場合は「,」で区切ってください 例 $to = "aa@aa.aa,bb@bb.bb";)
 $to = "learning.ios.dev@gmail.com";
@@ -50,7 +50,7 @@ $Email = "Email";
 $Referer_check = 0;
 
 //リファラチェックを「する」場合のドメイン ※以下例を参考に設置するサイトのドメインを指定して下さい。
-$Referer_check_domain = " http://ios-class-for-beginner.esy.es/";
+$Referer_check_domain = " http://ios-class-for-beginners.com/ca/";
 
 //---------------------------　必須設定　ここまで　------------------------------------
 
@@ -146,7 +146,7 @@ $mailSignature = <<< FOOTER
 Wataru Maeda
 iOS Development Class for Beginner
 E-Mail : learning.ios.dev@gmail.com
-Webサイト: http://ios-class-for-beginner.esy.es/
+Webサイト: http://ios-class-for-beginners.com/ca/
 ++++++++++++++++++++++++++++
 
 FOOTER;

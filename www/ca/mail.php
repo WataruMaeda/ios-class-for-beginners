@@ -17,7 +17,7 @@
 #
 ##-----------------------------------------------------------------------------------------------------------------##
 if (version_compare(PHP_VERSION, '5.1.0', '>=')) {//PHP5.1.0以上の場合のみタイムゾーンを定義
-	date_default_timezone_set('Asia/Tokyo');//タイムゾーンの設定（日本以外の場合には適宜設定ください）
+	date_default_timezone_set('America/Vancouver');//タイムゾーンの設定（日本以外の場合には適宜設定ください）
 }
 /*-------------------------------------------------------------------------------------------------------------------
 * ★以下設定時の注意点　
@@ -33,7 +33,7 @@ if (version_compare(PHP_VERSION, '5.1.0', '>=')) {//PHP5.1.0以上の場合の�
 //---------------------------　必須設定　必ず設定してください　-----------------------
 
 //サイトのトップページのURL　※デフォルトでは送信完了後に「トップページへ戻る」ボタンが表示されますので
-$site_top = " http://ios-class-for-beginners.com/";
+$site_top = "http://ios-class-for-beginners.com/ca/";
 
 // 管理者メールアドレス ※メールを受け取るメールアドレス(複数指定する場合は「,」で区切ってください 例 $to = "aa@aa.aa,bb@bb.bb";)
 $to = "learning.ios.dev@gmail.com";
@@ -50,7 +50,7 @@ $Email = "Email";
 $Referer_check = 0;
 
 //リファラチェックを「する」場合のドメイン ※以下例を参考に設置するサイトのドメインを指定して下さい。
-$Referer_check_domain = " http://ios-class-for-beginners.com/";
+$Referer_check_domain = " http://ios-class-for-beginners.com/ca/";
 
 //---------------------------　必須設定　ここまで　------------------------------------
 
@@ -67,7 +67,7 @@ $userMail = 1;
 $BccMail = "";
 
 // 管理者宛に送信されるメールのタイトル（件名）
-$subject = '「問い合わせ」iPhoneアプリ開発入門コース';
+$subject = 'Inquiry: iOS Development Class for Beginner';
 
 // 送信確認画面の表示(する=1, しない=0)
 $confirmDsp = 1;
@@ -98,10 +98,10 @@ $require = array('Name','Email','Message');
 $remail = 1;
 
 //自動返信メールの送信者欄に表示される名前　※あなたの名前や会社名など（もし自動返信メールの送信者名が文字化けする場合ここは空にしてください）
-$refrom_name = "iPhoneアプリ開発入門コース";
+$refrom_name = "iOS Development Class for Beginner";
 
 // 差出人に送信確認メールを送る場合のメールのタイトル（上記で1を設定した場合のみ）
-$re_subject = "お問い合わせありがとうございました";
+$re_subject = "Thank you for your inquiry";
 
 //フォーム側の「名前」箇所のname属性の値　※自動返信メールの「○○様」の表示で使用します。
 //指定しない、または存在しない場合は、○○様と表示されないだけです。あえて無効にしてもOK
@@ -143,10 +143,10 @@ $mailFooterDsp = 1;
 $mailSignature = <<< FOOTER
 
 ++++++++++++++++++++++++++++
-前田　渉
-iPhoneアプリ開発入門コース
+Wataru Maeda
+iOS Development Class for Beginner
 E-Mail : learning.ios.dev@gmail.com
-Webサイト: http://ios-class-for-beginners.com/
+Webサイト: http://ios-class-for-beginners.com/ca/
 ++++++++++++++++++++++++++++
 
 FOOTER;
@@ -244,7 +244,7 @@ else if($confirmDsp == 1){
 <meta name="description" content="">
 <meta name="author" content="">
     
-<title>確認画面</title>
+<title>Confirmation</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -283,7 +283,7 @@ else if($confirmDsp == 1){
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 text-center">
 			<br>
-            <h2 class="section-heading">送信内容の確認</h2>
+            <h2 class="section-heading">Confirmation</h2>
 			<hr class="primary">
 			<p class="text-faded">
 			<p align="center">送信内容にお間違いありませんでしょうか？</p>
